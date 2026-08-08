@@ -6,14 +6,12 @@ Built for the [BasePaint Hackathon 2026](https://basepaint.xyz/hack) (Aug 1–8)
 
 ## Tools
 
-| Tool | What it does |
-| --- | --- |
-| 🪣 **Bucket Fill** | Exact-color flood fill (8-way). Click a region, fill with the active palette color. |
-| 📤 **Image Upload** | Drop an image or pick a file. Pixels are matched to today's palette, previewed, then pasted as strokes. Optional *no-overprint* mode skips pixels that already match the canvas. |
-| 🎨 **Color Picker** | Click any pixel on the canvas — the closest palette color becomes your active color. |
-| 🪞 **Mirror** | Toggle symmetric drawing across the canvas axis. Hold to draw in multiple quadrants at once. |
-| ⬇ **Stroke Download** | Save your strokes as a single text file, or split into N-pixel chunks (paste one at a time, works around the per-stroke pixel cap). PNG export of just your strokes too. |
-| ℹ️ **About Modal** | Auto-shown once when you first visit `/paint`. Hackathon credits, feedback via X, *don't show again* remembered locally. |
+| Tool                  | What it does                                                                                                                                                                     |
+| --------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 🪣 **Bucket Fill**    | Exact-color flood fill (8-way). Click a region, fill with the active palette color.                                                                                              |
+| 📤 **Image Upload**   | Drop an image or pick a file. Pixels are matched to today's palette, previewed, then pasted as strokes. Optional _no-overprint_ mode skips pixels that already match the canvas. |
+| 🎨 **Color Picker**   | Click any pixel on the canvas — the closest palette color becomes your active color.                                                                                             |
+| ⬇ **Stroke Download** | Save your strokes as a single text file, or split into N-pixel chunks (paste one at a time, works around the per-stroke pixel cap). PNG export of just your strokes too.         |
 
 ## Installation (Developer Mode)
 
@@ -58,7 +56,6 @@ basepaint-plugin/
 ├── icons/                       # Extension icons (16/32/48/128)
 ├── docs/                        # GitHub Pages landing page (index.html + assets/)
 ├── dist/                        # Built copy of src/ for the unpacked load
-├── .agents/                     # Agent skills (planning + triage)
 └── README.md
 ```
 
@@ -81,8 +78,8 @@ Settings → Pages → Source: Deploy from a branch → Branch: main → Folder:
 
 This plugin builds on two pieces of work that came before it:
 
-- **[CopyStroke by Afuro](https://x.com/)** — the clipboard-paste pattern that makes bucket & upload possible
-- **[Baseprite by Creamy](https://github.com/uwucreamy/Baseprite)** — reference for plugin UX & canvas-tool conventions
+- **[CopyStroke by Afuro](https://copystroke.vercel.app/)** — the clipboard-paste pattern that makes bucket & upload possible
+- **[Baseprite by Creamy](https://www.tinypixelpepe.com/baseprite/)** — plugin UX & canvas-tool reference
 
 ## License
 

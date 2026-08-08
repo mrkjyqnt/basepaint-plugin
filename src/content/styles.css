@@ -1,0 +1,308 @@
+
+
+@font-face {
+  font-family: 'Viga';
+  src: url('https://basepaint.xyz/_next/static/media/Viga_Regular-s.p.0tjq2g48zd31c.ttf') format('truetype');
+  font-display: swap;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'Roboto Mono';
+  src: url('https://basepaint.xyz/_next/static/media/RobotoMono%5Bwght%5D-s.p.0k8k9ctdl-biy.ttf') format('truetype');
+  font-display: swap;
+  font-weight: 300 700;
+}
+
+@font-face {
+  font-family: 'MEK Sans';
+  src: url('https://basepaint.xyz/_next/static/media/MEKSans_Regular-s.p.10fmo41bamuvk.woff2') format('woff2');
+  font-display: swap;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'MEK Mono';
+  src: url('https://basepaint.xyz/_next/static/media/MEK_Mono-s.p.0s.44ulbewt7j.woff2') format('woff2');
+  font-display: swap;
+  font-weight: 400;
+}
+
+.basepaint-plugin-btn--active,
+button.basepaint-plugin-btn--active {
+  box-shadow:
+    0 0 0 1px #111827,
+    0 0 0 3px #3b82f6 !important;
+}
+
+.basepaint-plugin-btn svg {
+  pointer-events: none;
+}
+
+.basepaint-plugin-hide-cursor,
+.basepaint-plugin-hide-cursor * {
+  cursor: none !important;
+}
+
+.basepaint-plugin-modal-overlay {
+  --bp-bg: #1E2735;
+  --bp-bg-deep: #0f1722;
+  --bp-border: #2c3a4f;
+  --bp-text: #ffffff;
+  --bp-text-2: #d4dae3;
+  --bp-text-3: #8b9bb0;
+  --bp-text-4: #5a6b82;
+  --bp-blue: #0042e0;
+  --bp-blue-hover: #0033b8;
+  --bp-blue-light: #1d63ff;
+  --bp-yellow: #fde047;
+  --bp-red: #ef4444;
+
+  position: fixed; inset: 0; z-index: 99999;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Roboto Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  color: var(--bp-text);
+}
+
+.basepaint-plugin-modal {
+  background: var(--bp-bg);
+  border: 1px solid var(--bp-border);
+  border-radius: 8px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+  padding: 20px;
+  width: 100%;
+  max-width: 420px;
+  display: flex; flex-direction: column; gap: 12px;
+}
+
+.basepaint-plugin-modal-title {
+  font-family: 'MEK Sans', system-ui, sans-serif;
+  font-size: 18px; font-weight: 400;
+  margin: 0;
+  color: var(--bp-text);
+  letter-spacing: -0.005em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.basepaint-plugin-modal-title-logo {
+  width: 28px;
+  height: 28px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.basepaint-plugin-modal-desc {
+  font-size: 12px; color: var(--bp-text-3);
+  margin: 0; line-height: 1.5;
+  font-family: 'Roboto Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+}
+
+.basepaint-plugin-modal-desc a {
+  color: var(--bp-blue);
+  text-decoration: none;
+  font-weight: 600;
+}
+.basepaint-plugin-modal-desc a:hover {
+  color: var(--bp-blue-light);
+  text-decoration: underline;
+}
+
+.basepaint-plugin-modal-hack-banner {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  background: rgba(0, 66, 224, 0.08);
+  border: 1px solid rgba(0, 66, 224, 0.3);
+  border-radius: 6px;
+  padding: 10px 12px;
+}
+
+.basepaint-plugin-modal-hack-meta {
+  display: flex; flex-direction: column; gap: 2px; min-width: 0;
+}
+
+.basepaint-plugin-modal-hack-label {
+  font-family: 'Viga', sans-serif;
+  font-size: 11px;
+  color: var(--bp-yellow);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.basepaint-plugin-modal-hack-deadline {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 11px;
+  color: var(--bp-text-2);
+}
+
+.basepaint-plugin-modal-credits {
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--bp-text-2);
+  font-family: 'Roboto Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+}
+.basepaint-plugin-modal-credits b { color: var(--bp-text); font-weight: 600; }
+
+.basepaint-plugin-modal-tag {
+  display: inline-block; padding: 2px 6px;
+  background: rgba(0, 66, 224, 0.18);
+  color: var(--bp-blue-light);
+  border-radius: 3px;
+  font-size: 10px; font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-right: 6px;
+}
+
+.basepaint-plugin-modal-section-label {
+  font-size: 10px; color: var(--bp-text-4);
+  text-transform: uppercase; letter-spacing: 0.05em;
+  margin-bottom: 4px;
+}
+
+.basepaint-plugin-modal-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 10px 12px;
+  font-size: 13px; font-weight: 600;
+  font-family: inherit;
+  background: var(--bp-bg-deep);
+  color: var(--bp-text);
+  border: 1px solid var(--bp-border);
+  border-radius: 6px;
+  cursor: pointer;
+  text-align: left;
+  text-decoration: none;
+  transition: border-color 0.15s, background 0.15s;
+}
+.basepaint-plugin-modal-btn:hover { border-color: #4b5563; }
+
+.basepaint-plugin-modal-btn--primary {
+  background: var(--bp-blue);
+  border-color: var(--bp-blue);
+  color: white;
+  text-align: center;
+}
+.basepaint-plugin-modal-btn--primary:hover {
+  background: var(--bp-blue-hover);
+  border-color: var(--bp-blue-hover);
+}
+
+.basepaint-plugin-modal-btn--x {
+  background: #000;
+  border-color: #000;
+  color: white;
+  justify-content: center;
+}
+.basepaint-plugin-modal-btn--x:hover { background: #1a1a1a; border-color: #1a1a1a; }
+
+.basepaint-plugin-modal-btn--ghost {
+  background: transparent; border: none;
+  color: var(--bp-text-3); font-size: 12px;
+  padding: 6px 14px;
+}
+.basepaint-plugin-modal-btn--ghost:hover { color: var(--bp-text); }
+
+.basepaint-plugin-modal-link {
+  color: var(--bp-blue);
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 600;
+}
+.basepaint-plugin-modal-link:hover {
+  color: var(--bp-blue-light);
+  text-decoration: underline;
+}
+
+.basepaint-plugin-modal-checkbox-row {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 12px; color: var(--bp-text-2);
+  cursor: pointer;
+}
+.basepaint-plugin-modal-checkbox-row input { cursor: pointer; }
+
+.basepaint-plugin-modal-stats {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 12px; color: var(--bp-text-2);
+  line-height: 1.5;
+}
+.basepaint-plugin-modal-stats b { color: var(--bp-text); font-weight: 700; }
+
+.basepaint-plugin-modal-actions-end {
+  display: flex; justify-content: flex-end;
+}
+
+.basepaint-plugin-modal-actions-row {
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 8px;
+}
+
+.basepaint-plugin-modal-btn-stack {
+  display: flex; flex-direction: column; gap: 8px;
+}
+
+.basepaint-plugin-modal-form-row {
+  display: flex; gap: 6px; align-items: center;
+}
+
+.basepaint-plugin-modal-preview {
+  display: flex; gap: 12px; align-items: stretch;
+}
+
+.basepaint-plugin-modal-preview-img {
+  width: 96px; height: 96px;
+  border: 1px solid var(--bp-border);
+  border-radius: 4px;
+  background: var(--bp-bg-deep);
+  image-rendering: pixelated;
+  flex-shrink: 0;
+}
+
+.basepaint-plugin-modal-preview-meta {
+  display: flex; flex-direction: column; gap: 6px;
+  flex: 1; min-width: 0;
+  justify-content: space-between;
+}
+
+.basepaint-plugin-modal-input {
+  width: 100%;
+  padding: 8px 10px;
+  background: var(--bp-bg-deep);
+  color: var(--bp-text);
+  border: 1px solid var(--bp-border);
+  border-radius: 6px;
+  font-size: 12px;
+  font-family: 'Roboto Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+}
+.basepaint-plugin-modal-input:focus {
+  outline: none;
+  border-color: var(--bp-blue);
+}
+.basepaint-plugin-modal-input--narrow { width: 80px; }
+
+.basepaint-plugin-modal-hint {
+  font-size: 11px; color: var(--bp-text-4);
+  margin: 0; line-height: 1.4;
+  font-family: 'Roboto Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+}
+
+.basepaint-plugin-modal-stats-block {
+  display: flex; flex-direction: column; gap: 4px;
+  padding: 10px 12px;
+  background: var(--bp-bg-deep);
+  border: 1px solid var(--bp-border);
+  border-radius: 6px;
+}
+
+.basepaint-plugin-modal-swatches {
+  display: flex; align-items: center; gap: 4px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+
+.basepaint-plugin-modal-swatch {
+  width: 14px; height: 14px;
+  border-radius: 3px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  flex-shrink: 0;
+}

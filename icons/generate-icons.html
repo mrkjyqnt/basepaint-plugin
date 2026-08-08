@@ -1,0 +1,130 @@
+<!-- 
+  ICON GENERATOR — Open this file in Chrome, then:
+  1. Click each "Download" link
+  2. Save the files into the basepaint-plugin/icons/ folder
+  
+  The icons are dark blue squares (#1E2735) with a paint bucket icon,
+  matching BasePaint's brand colors.
+-->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>BasePaint Plugin — Generate Extension Icons</title>
+  <style>
+    body { font-family: system-ui; padding: 2rem; background: #111; color: #eee; }
+    .icon-row { display: flex; align-items: center; gap: 1.5rem; margin: 1.5rem 0; padding: 1rem; background: #222; border-radius: 8px; }
+    canvas { border: 1px solid #444; border-radius: 4px; }
+    a { color: #60a5fa; font-weight: 600; text-decoration: none; padding: 0.5rem 1rem; border: 1px solid #60a5fa; border-radius: 6px; }
+    a:hover { background: #60a5fa22; }
+    h1 { color: #fde047; }
+    .size { color: #999; font-size: 0.875rem; min-width: 80px; }
+    .status { color: #22c55e; margin-left: 1rem; display: none; }
+  </style>
+</head>
+<body>
+  <h1>🎨 BasePaint Plugin Icons</h1>
+  <p>Click each download link, then save the file to <code>basepaint-plugin/icons/</code></p>
+  <div id="output"></div>
+
+  <script>
+    function drawIcon(ctx, size) {
+      const s = size / 24;
+      
+      // Background with rounded corners
+      ctx.fillStyle = '#1E2735';
+      ctx.beginPath();
+      const r = size * 0.15;
+      ctx.moveTo(r, 0);
+      ctx.lineTo(size - r, 0);
+      ctx.arcTo(size, 0, size, r, r);
+      ctx.lineTo(size, size - r);
+      ctx.arcTo(size, size, size - r, size, r);
+      ctx.lineTo(r, size);
+      ctx.arcTo(0, size, 0, size - r, r);
+      ctx.lineTo(0, r);
+      ctx.arcTo(0, 0, r, 0, r);
+      ctx.fill();
+
+      if (size >= 48) {
+        // Paint bucket body
+        ctx.strokeStyle = '#fde047';
+        ctx.fillStyle = '#073eb1';
+        ctx.lineWidth = Math.max(1.5, s * 1.8);
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+
+        ctx.beginPath();
+        ctx.moveTo(s * 6, s * 17);
+        ctx.lineTo(s * 6, s * 10);
+        ctx.lineTo(s * 14, s * 10);
+        ctx.lineTo(s * 14, s * 17);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+
+        // Handle
+        ctx.beginPath();
+        ctx.moveTo(s * 8, s * 10);
+        ctx.quadraticCurveTo(s * 10, s * 5.5, s * 12, s * 10);
+        ctx.stroke();
+
+        // Paint drop
+        ctx.fillStyle = '#fde047';
+        ctx.beginPath();
+        ctx.moveTo(s * 17.5, s * 12);
+        ctx.quadraticCurveTo(s * 19.5, s * 15.5, s * 17.5, s * 18.5);
+        ctx.quadraticCurveTo(s * 15, s * 16.5, s * 17.5, s * 12);
+        ctx.fill();
+      } else {
+        // Simplified icon for 16px - just a colored square with border
+        ctx.fillStyle = '#073eb1';
+        ctx.fillRect(s * 5, s * 7, s * 14, s * 12);
+        ctx.fillStyle = '#fde047';
+        ctx.fillRect(s * 14, s * 10, s * 5, s * 8);
+      }
+    }
+
+    function createIcon(size) {
+      const container = document.getElementById('output');
+      const row = document.createElement('div');
+      row.className = 'icon-row';
+
+      const sizeLabel = document.createElement('span');
+      sizeLabel.className = 'size';
+      sizeLabel.textContent = `${size}×${size}`;
+
+      const canvas = document.createElement('canvas');
+      canvas.width = size;
+      canvas.height = size;
+      canvas.style.width = `${Math.max(size, 48)}px`;
+      canvas.style.height = `${Math.max(size, 48)}px`;
+      canvas.style.imageRendering = 'pixelated';
+      const ctx = canvas.getContext('2d');
+      drawIcon(ctx, size);
+
+      const link = document.createElement('a');
+      link.download = `icon${size}.png`;
+      link.href = canvas.toDataURL('image/png');
+      link.textContent = `Download icon${size}.png`;
+      link.addEventListener('click', () => {
+        const status = row.querySelector('.status');
+        status.style.display = 'inline';
+      });
+
+      const status = document.createElement('span');
+      status.className = 'status';
+      status.textContent = '✓ Downloaded';
+
+      row.appendChild(sizeLabel);
+      row.appendChild(canvas);
+      row.appendChild(link);
+      row.appendChild(status);
+      container.appendChild(row);
+    }
+
+    createIcon(16);
+    createIcon(48);
+    createIcon(128);
+  </script>
+</body>
+</html>

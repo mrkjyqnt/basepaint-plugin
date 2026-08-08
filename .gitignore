@@ -1,0 +1,25 @@
+node_modules/
+.DS_Store
+.env
+.env.local
+.env.*.local
+
+# Editor / OS junk
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+Thumbs.db
+
+# Build / temp
+*.log
+*.tmp
+.cache/
+dist/icons/generate-icons.html
+dist/icons/generate-icons.js
+.agents
+.claude
+.scratch
+AGENTS.md
+skills-lock.json

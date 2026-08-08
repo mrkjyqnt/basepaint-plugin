@@ -365,6 +365,7 @@ const PICKER_CURSOR = `url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.or
     document.querySelectorAll(`.${PLUGIN_ID}-btn`).forEach((btn) => {
       btn.classList.remove(`${PLUGIN_ID}-btn--active`);
     });
+    updateCursor();
     log('Plugin tool cleared (native tool clicked)');
   }
 

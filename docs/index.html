@@ -12,7 +12,6 @@
 <link rel="icon" href="assets/logo.png">
 <link rel="preload" as="image" href="assets/logo.png">
 <style>
-@font-face { font-family: 'Viga'; src: url('assets/fonts/Viga_Regular.ttf') format('truetype'); font-display: swap; font-weight: 400; }
 @font-face { font-family: 'Roboto Mono'; src: url('assets/fonts/RobotoMono.ttf') format('truetype'); font-display: swap; font-weight: 300 700; }
 @font-face { font-family: 'MEK Sans'; src: url('assets/fonts/MEKSans_Regular.woff2') format('woff2'); font-display: swap; font-weight: 400; }
 @font-face { font-family: 'MEK Mono'; src: url('assets/fonts/MEK_Mono.woff2') format('woff2'); font-display: swap; font-weight: 400; }
@@ -31,8 +30,8 @@
   --bp-blue-light: #1d63ff;
   --bp-yellow: #fde047;
   --bp-red: #ef4444;
-  --font-display: 'Viga', system-ui, sans-serif;
-  --font-body: 'MEK Sans', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-display: 'MEK Sans', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: 'Roboto Mono', ui-monospace, 'SF Mono', Menlo, monospace;
   --font-mono: 'Roboto Mono', ui-monospace, 'SF Mono', Menlo, monospace;
 }
 
@@ -376,7 +375,7 @@ p { color: var(--bp-text-2); }
 
       <div class="tool-card">
         <div class="tool-head">
-          <div class="tool-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" transform="scale(-1, 1) translate(-24, 0)"><path d="m19 11-8-8-8.6 8.6a2 2 0 0 0 0 2.8l5.2 5.2c.8.8 2 .8 2.8 0L19 11Z"/><path d="m5 2 5 5"/><path d="M2 13h15"/><path d="M22 20a2 2 0 1 1-4 0c0-1.6 1.7-2.4 2-4 .3 1.6 2 2.4 2 4Z"/></svg></div>
+          <div class="tool-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transform: scaleX(-1); margin-left: -2px"><path d="m19 11-8-8-8.6 8.6a2 2 0 0 0 0 2.8l5.2 5.2c.8.8 2 .8 2.8 0L19 11Z"/><path d="m5 2 5 5"/><path d="M2 13h15"/><path d="M22 20a2 2 0 1 1-4 0c0-1.6 1.7-2.4 2-4 .3 1.6 2 2.4 2 4Z"/></svg></div>
           <h3 class="tool-name">Bucket Fill</h3>
         </div>
         <p class="tool-desc">Flood fill a connected region with the active palette color. Exact-color match, 8-way. Hotkey <strong>B</strong>.</p>

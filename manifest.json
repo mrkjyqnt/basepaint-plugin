@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "BasePaint Plugin",
   "version": "0.1.0",
-  "description": "Adds bucket fill, image upload, color picker, and mirror tools to BasePaint's canvas editor.",
+  "description": "Adds bucket fill, image upload, color picker, and stroke download tools to BasePaint's canvas editor.",
   "icons": {
     "16": "icons/icon-16.png",
     "32": "icons/icon-32.png",
@@ -22,7 +22,7 @@
         "src/content/tools/bucket.js",
         "src/content/tools/upload.js",
         "src/content/tools/picker.js",
-        "src/content/tools/mirror.js",
+        "src/content/tools/download.js",
         "src/content/main.js"
       ],
       "css": ["src/content/styles.css"],

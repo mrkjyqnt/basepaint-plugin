@@ -346,10 +346,11 @@ p { color: var(--bp-text-2); }
         <span class="kicker">BasePaint Hackathon 2026</span>
         <h1>Tools that should've been there from <span class="accent">day&nbsp;one</span>.</h1>
         <p class="lead">A Chrome extension for <a href="https://basepaint.xyz/paint" target="_blank" rel="noopener">basepaint.xyz/paint</a> that adds bucket fill, image upload, color picker, mirror, and a clean stroke downloader — all without leaving the canvas.</p>
-        <div class="hero-cta">
-          <a href="#install" class="btn">Install for Chrome →</a>
-          <a href="https://basepaint.xyz/hack" target="_blank" rel="noopener" class="btn btn-ghost">About the hackathon</a>
-        </div>
+    <div class="hero-cta">
+      <a href="https://github.com/mrkjyqnt/basepaint-plugin/releases/latest" class="btn" id="hero-download-btn">⬇  Download v0.1.0</a>
+      <a href="#install" class="btn btn-ghost">Install instructions →</a>
+      <a href="https://basepaint.xyz/hack" target="_blank" rel="noopener" class="btn btn-ghost">About the hackathon</a>
+    </div>
       </div>
       <img src="assets/logo.png" alt="BasePaint Plugin" class="hero-logo">
     </div>
@@ -375,10 +376,10 @@ p { color: var(--bp-text-2); }
 
       <div class="tool-card">
         <div class="tool-head">
-          <div class="tool-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 7 6 2"/><path d="M18.992 12H2.041"/><path d="M21.145 18.38A3.34 3.34 0 0 1 20 16.5a3.3 3.3 0 0 0-2.633-3.237A2.98 2.98 0 0 0 14 16.5a3.34 3.34 0 0 1-1.145 1.88C12.28 18.84 12 19.4 12 20c0 1.1.9 2 2 2h6c1.1 0 2-.9 2-2 0-.6-.28-1.16-.855-1.62Z"/><path d="m2 12 6.966-4.985a2 2 0 0 1 2.61.163L16 12"/></svg></div>
+          <div class="tool-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" transform="scale(-1, 1) translate(-24, 0)"><path d="m19 11-8-8-8.6 8.6a2 2 0 0 0 0 2.8l5.2 5.2c.8.8 2 .8 2.8 0L19 11Z"/><path d="m5 2 5 5"/><path d="M2 13h15"/><path d="M22 20a2 2 0 1 1-4 0c0-1.6 1.7-2.4 2-4 .3 1.6 2 2.4 2 4Z"/></svg></div>
           <h3 class="tool-name">Bucket Fill</h3>
         </div>
-        <p class="tool-desc">Exact-color flood fill (8-way). Click a region, fill with the active palette color. Reads pixels from the canvas, writes strokes back so they commit to the chain like a normal paint.</p>
+        <p class="tool-desc">Flood fill a connected region with the active palette color. Exact-color match, 8-way. Hotkey <strong>B</strong>.</p>
       </div>
 
       <div class="tool-card">
@@ -386,23 +387,15 @@ p { color: var(--bp-text-2); }
           <div class="tool-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10l-3.1-3.1a2 2 0 0 0-2.814.014L6 21"/><path d="m14 19.5 3-3 3 3"/><path d="M17 22v-5.5"/><circle cx="9" cy="9" r="2"/></svg></div>
           <h3 class="tool-name">Image Upload</h3>
         </div>
-        <p class="tool-desc">Drop an image or pick a file. Pixels are matched to today's palette, previewed, then pasted as strokes. Optional <em>no-overprint</em> mode skips pixels that already match the canvas.</p>
+        <p class="tool-desc">Drop an image or pick a file. Pixels are matched to today's palette and pasted as strokes.</p>
       </div>
 
       <div class="tool-card">
         <div class="tool-head">
-          <div class="tool-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 9-8.414 8.414A2 2 0 0 0 3 18.828v1.344a2 2 0 0 1-.586 1.414"/><path d="M16.5 2.5a2.121 2.121 0 0 1 3 3L13 12l-4 1 1-4Z"/><path d="m2.5 21.5 3-3"/></svg></div>
+          <div class="tool-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m2 22 1-1h3l9-9"/><path d="M3 21v-3l9-9"/><path d="m15 6 3.4-3.4a2.1 2.1 0 1 1 3 3L18 9l.4.4a2.1 2.1 0 1 1-3 3l-3.8-3.8a2.1 2.1 0 1 1 3-3l.4.4Z"/></svg></div>
           <h3 class="tool-name">Color Picker</h3>
         </div>
-        <p class="tool-desc">Click any pixel on the canvas — the closest palette color becomes your active color. Useful for matching tones without guessing the hex.</p>
-      </div>
-
-      <div class="tool-card">
-        <div class="tool-head">
-          <div class="tool-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"/><path d="M3 12h18"/></svg></div>
-          <h3 class="tool-name">Mirror</h3>
-        </div>
-        <p class="tool-desc">Toggle symmetric drawing across the canvas axis. Hold to draw in four quadrants at once — handy for mandalas, faces, or anything where balance matters.</p>
+        <p class="tool-desc">Click any pixel on the canvas — a magnifier preview shows the local area, and the closest palette color becomes your active color. Hotkey <strong>I</strong>.</p>
       </div>
 
       <div class="tool-card">
@@ -410,15 +403,7 @@ p { color: var(--bp-text-2); }
           <div class="tool-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div>
           <h3 class="tool-name">Stroke Download</h3>
         </div>
-        <p class="tool-desc">Save your strokes as a single text file, or split into N-pixel chunks (paste one at a time, works around the per-stroke pixel cap). PNG export of just your strokes too.</p>
-      </div>
-
-      <div class="tool-card">
-        <div class="tool-head">
-          <div class="tool-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
-          <h3 class="tool-name">About Modal</h3>
-        </div>
-        <p class="tool-desc">Auto-shown once when you first visit /paint. Hackathon credits, feedback via X, "don't show again" remembered locally.</p>
+        <p class="tool-desc">Export your strokes as a PNG (transparent background) or as a basepaint-paste-ready text file. Split into N-pixel chunks to work around the per-stroke cap.</p>
       </div>
 
     </div>
@@ -430,21 +415,21 @@ p { color: var(--bp-text-2); }
     <div class="section-head">
       <span class="kicker">How it works</span>
       <h2>It reads your strokes. It doesn't touch the chain.</h2>
-      <p class="lead">The plugin lives as a content script inside basepaint.xyz. It reads from your existing strokes via the native Copy button, never from the on-chain canvas — so it stays accurate to what you've drawn but not committed.</p>
+      <p class="lead">The plugin lives as a content script inside basepaint.xyz. It reads from your existing strokes (via the native Copy button or the live canvas diff) and writes back via the same Paste button — so it stays accurate to what you've drawn but not committed.</p>
     </div>
 
     <div class="steps">
       <div class="step">
         <h3>Drop in</h3>
-        <p>Install the Chrome extension, refresh /paint. Five new icons appear next to basepaint's native toolbar — no extra window, no new tab.</p>
+        <p>Install the Chrome extension, refresh /paint. Four new icons appear next to basepaint's native toolbar — no extra window, no new tab.</p>
       </div>
       <div class="step">
-        <h3>Draw / fill / upload</h3>
-        <p>Each tool reads the same data basepaint does (the live canvas + native Copy button) and writes back via the same Paste button. You see exactly what you'd see if you'd done it by hand.</p>
+        <h3>Fill / pick / upload</h3>
+        <p>Each tool reads the canvas and writes back via basepaint's native Paste button. You see exactly what you'd see if you'd done it by hand.</p>
       </div>
       <div class="step">
         <h3>Save your work</h3>
-        <p>Download strokes as a text file in basepaint's paste format. One file or many N-pixel chunks — paste them back into a different day, a different project, anywhere.</p>
+        <p>Download your strokes as a PNG (transparent background) or as a basepaint-paste-ready text file. Split into N-pixel chunks to work around the per-stroke cap.</p>
       </div>
     </div>
   </div>
@@ -460,21 +445,25 @@ p { color: var(--bp-text-2); }
 
     <div class="install-grid">
       <div class="install-card">
-        <h3>Option A — Load unpacked</h3>
+        <h3>Option A — Download the release</h3>
+        <p>Grab the latest <code>.zip</code> from the <a href="https://github.com/mrkjyqnt/basepaint-plugin/releases" target="_blank" rel="noopener">Releases page</a>:</p>
+        <p style="text-align:center;margin:16px 0">
+          <a href="https://github.com/mrkjyqnt/basepaint-plugin/releases/latest" class="btn" style="display:inline-block">⬇  Download latest release</a>
+        </p>
         <ol class="steps-list">
-          <li>Clone or download the repo: <code>git clone https://github.com/yourname/basepaint-plugin.git</code></li>
+          <li>Unzip the downloaded file</li>
           <li>Open <code>chrome://extensions</code> in Chrome</li>
           <li>Toggle <strong>Developer mode</strong> on (top-right)</li>
-          <li>Click <strong>Load unpacked</strong> and pick the project folder</li>
+          <li>Click <strong>Load unpacked</strong> and pick the unzipped folder</li>
           <li>Visit <a href="https://basepaint.xyz/paint" target="_blank" rel="noopener">basepaint.xyz/paint</a> — the plugin loads automatically</li>
         </ol>
       </div>
 
       <div class="install-card">
-        <h3>Option B — Build &amp; zip</h3>
-        <p class="muted" style="font-size: 14px;">When the Web Store submission is ready:</p>
-        <div class="code-block">npm install<br>npm run build<br>npm run package</div>
-        <p class="muted" style="font-size: 13px; margin-top: 12px;">The packaged <code>.zip</code> is what you upload to the Chrome Developer Dashboard.</p>
+        <h3>Option B — From source</h3>
+        <p>Clone the repo and load it unpacked:</p>
+        <div class="code-block">git clone https://github.com/mrkjyqnt/basepaint-plugin.git<br>cd basepaint-plugin</div>
+        <p class="muted" style="font-size: 13px; margin-top: 12px;">Then follow steps 2–5 from Option A, pointing Load unpacked at the cloned folder.</p>
       </div>
     </div>
 

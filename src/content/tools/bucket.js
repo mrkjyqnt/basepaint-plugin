@@ -23,6 +23,22 @@
     return null;
   }
 
+  function writePixelsToCanvasDirect(canvas, pixels, palette) {
+    const ctx = canvas.getContext("2d", { willReadFrequently: true });
+    const logical = BP.getLogicalSize(canvas);
+    const scale = canvas.width / logical;
+    const lastHex = { value: null };
+    for (const pixel of pixels) {
+      const hex = palette[pixel.color];
+      if (!hex) continue;
+      if (hex !== lastHex.value) {
+        ctx.fillStyle = hex;
+        lastHex.value = hex;
+      }
+      ctx.fillRect(pixel.point.x * scale, pixel.point.y * scale, scale, scale);
+    }
+  }
+
   BP.bucketFill = function (canvas, startX, startY, fillColorHex, opts) {
     const SIZE = BP.getLogicalSize(canvas);
     const bitmapScale = canvas.width / SIZE;
@@ -145,71 +161,19 @@
       return 0;
     }
 
+    const strokes = logical.map((p) => ({
+      point: { x: p.x, y: p.y },
+      color: colorIdx,
+    }));
+
     console.log(
-      `[basepaint-plugin] Bucket fill: writing ${logical.length} pixels (mode=${opts?.mode || "flood"})`,
+      `[basepaint-plugin] Bucket fill: writing ${strokes.length} pixels (mode=${opts?.mode || "flood"})`,
     );
 
-    const logicalSize = BP.getLogicalSize(canvas);
-    const scale = canvas.width / logicalSize;
-    const BW = canvas.width;
-    const BH = canvas.height;
-    const ctx = canvas.getContext("2d", { willReadFrequently: true });
-    const colorObj = parseHexColor(activeColor);
-    if (colorObj) {
-      const imgData = ctx.getImageData(0, 0, BW, BH);
-      const data = imgData.data;
-      const r = colorObj.r,
-        g = colorObj.g,
-        b = colorObj.b,
-        a = 255;
-      for (let i = 0; i < logical.length; i++) {
-        const p = logical[i];
-        const bx0 = Math.floor(p.x * scale);
-        const by0 = Math.floor(p.y * scale);
-        const bx1 = Math.min(BW - 1, bx0 + scale - 1);
-        const by1 = Math.min(BH - 1, by0 + scale - 1);
-        for (let by = by0; by <= by1; by++) {
-          const rowOff = by * BW * 4;
-          for (let bx = bx0; bx <= bx1; bx++) {
-            const off = rowOff + bx * 4;
-            data[off] = r;
-            data[off + 1] = g;
-            data[off + 2] = b;
-            data[off + 3] = a;
-          }
-        }
-      }
-      ctx.putImageData(imgData, 0, 0);
-    }
+    writePixelsToCanvasDirect(canvas, strokes, palette);
+    await BP.applyStrokesDirectly(strokes);
 
-    try {
-      const strokesJson = JSON.stringify(
-        logical.map((p) => ({ point: { x: p.x, y: p.y }, color: colorIdx })),
-      );
-      await navigator.clipboard.writeText(strokesJson);
-    } catch (e) {
-      console.warn(
-        "[basepaint-plugin] Could not write bucket strokes to clipboard:",
-        e.message,
-      );
-      return logical.length;
-    }
-
-    const pasteBtn = document.querySelector(
-      '#toolbar button[title="Paste Strokes"]',
-    );
-    if (pasteBtn && !pasteBtn.disabled) {
-      try {
-        pasteBtn.click();
-      } catch (e) {
-        console.warn(
-          "[basepaint-plugin] Paste Strokes click failed:",
-          e.message,
-        );
-      }
-    }
-
-    return logical.length;
+    return strokes.length;
   };
 
   console.log("[basepaint-plugin] Bucket fill tool loaded");

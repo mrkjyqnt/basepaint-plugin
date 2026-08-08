@@ -143,6 +143,10 @@
       console.warn("[basepaint-plugin] Clipboard write failed:", e.message);
     }
 
+    if (clipboardWritten) {
+      await new Promise((r) => setTimeout(r, 50));
+    }
+
     const F = BP.findBasePaintComponent();
     if (F && typeof F.memoizedProps?.onPaste === "function") {
       try {
@@ -156,10 +160,22 @@
       }
     }
 
-    const pasteBtn = document.querySelector(
-      '#toolbar button[title="Paste Strokes"]',
-    );
-    if (pasteBtn && clipboardWritten) {
+    const findPasteBtn = () => {
+      const desktop = document.querySelector("#toolbar button[title*=\"Paste Strokes\"]");
+      if (desktop) return desktop;
+      const mobile = document.querySelector("#toolBar button[title*=\"Paste Strokes\"]");
+      return mobile;
+    };
+    let pasteBtn = findPasteBtn();
+    if (!pasteBtn && clipboardWritten) {
+      for (let i = 0; i < 10; i++) {
+        await new Promise((r) => setTimeout(r, 100));
+        pasteBtn = findPasteBtn();
+        if (pasteBtn) break;
+      }
+    }
+
+    if (pasteBtn) {
       try {
         pasteBtn.click();
         return { ok: true, source: "paste-button-click" };

@@ -234,10 +234,15 @@ const PICKER_CURSOR = `url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.or
   const pickerPreviewSwatch = pickerPreview.querySelector('.basepaint-plugin-picker-preview-swatch');
 
   function installPickerPreview() {
+
     const canvas = findCanvas();
     if (!canvas) return;
     if (canvas.__pickerPreviewInstalled) return;
     canvas.__pickerPreviewInstalled = true;
+
+    let cachedImageData = null;
+    let cacheTime = 0;
+    const CACHE_TTL = 200;
 
     let lastEvent = null;
     let rafScheduled = false;
@@ -251,14 +256,17 @@ const PICKER_CURSOR = `url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.or
       const scaleY = canvas.height / rect.height;
       const px = Math.floor((e.clientX - rect.left) * scaleX);
       const py = Math.floor((e.clientY - rect.top) * scaleY);
-      const ctx = canvas.getContext('2d', { willReadFrequently: true });
       try {
-        const data = ctx.getImageData(px, py, 1, 1);
-        const r = data.data[0], g = data.data[1], b = data.data[2];
-        const hex = '#' + [r, g, b].map((c) => c.toString(16).padStart(2, '0')).join('');
+        const now = performance.now();
+        if (!cachedImageData || now - cacheTime > CACHE_TTL) {
+          cachedImageData = BP.readCanvasPixels(canvas);
+          cacheTime = now;
+        }
+        const pixel = BP.getPixelAt(cachedImageData, px, py, canvas.width);
+        const hex = '#' + [pixel.r, pixel.g, pixel.b].map((c) => c.toString(16).padStart(2, '0')).join('');
         pickerPreviewSwatch.style.background = hex;
-        pickerPreview.style.left = (e.clientX + 10) + 'px';
-        pickerPreview.style.top = (e.clientY - 72) + 'px';
+        pickerPreview.style.left = (e.clientX + 14) + 'px';
+        pickerPreview.style.top = (e.clientY - 100) + 'px';
         pickerPreview.style.display = 'block';
       } catch (err) {
       }
@@ -365,6 +373,7 @@ const PICKER_CURSOR = `url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.or
     document.querySelectorAll(`.${PLUGIN_ID}-btn`).forEach((btn) => {
       btn.classList.remove(`${PLUGIN_ID}-btn--active`);
     });
+    updateCursor();
     log('Plugin tool cleared (native tool clicked)');
   }
 

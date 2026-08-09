@@ -18,6 +18,9 @@ Thumbs.db
 .cache/
 dist/icons/generate-icons.html
 dist/icons/generate-icons.js
+
+# Wayfinder planning artifacts (kept local only)
+.wayfinder/
 .agents
 .claude
 .scratch

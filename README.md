@@ -1,42 +1,101 @@
+<div align="center">
+
+<img src="icons/icon-128.png" alt="BasePaint Plugin" width="96" height="96" />
+
 # BasePaint Plugin
 
-A Chrome extension that adds missing drawing tools to [BasePaint](https://basepaint.xyz/paint) — the collaborative daily pixel art canvas on Base L2.
+### Tools that should've been there from day one.
 
-Built for the [BasePaint Hackathon 2026](https://basepaint.xyz/hack) (Aug 1–8).
+A Chrome extension that adds missing drawing tools to [BasePaint](https://basepaint.xyz/paint) — the collaborative daily pixel-art canvas on Base L2.
 
-## Tools
+[![Hackathon Winner](https://img.shields.io/badge/🏆_BasePaint_Hackathon_2026-Winner_for_Artists-fde047?style=for-the-badge&labelColor=0042e0&color=fde047)](https://x.com/basepaint_xyz/status/2089728698866184299)
+[![License: CC0](https://img.shields.io/badge/License-CC0-0042e0?style=for-the-badge&labelColor=0042e0)](https://creativecommons.org/publicdomain/zero/1.0/)
+[![Chrome MV3](https://img.shields.io/badge/Chrome-MV3-0042e0?style=for-the-badge&labelColor=0042e0)](https://developer.chrome.com/docs/extensions/reference/manifest/manifest-v3)
+[![Vanilla JS](https://img.shields.io/badge/Vanilla-JS-fde047?style=for-the-badge&labelColor=0042e0)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 
-| Tool                  | What it does                                                                                                                                                                     |
-| --------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 🪣 **Bucket Fill**    | Exact-color flood fill (8-way). Click a region, fill with the active palette color.                                                                                              |
-| 📤 **Image Upload**   | Drop an image or pick a file. Pixels are matched to today's palette, previewed, then pasted as strokes. Optional _no-overprint_ mode skips pixels that already match the canvas. |
-| 🎨 **Color Picker**   | Click any pixel on the canvas — the closest palette color becomes your active color.                                                                                             |
-| ⬇ **Stroke Download** | Save your strokes as a single text file, or split into N-pixel chunks (paste one at a time, works around the per-stroke pixel cap). PNG export of just your strokes too.         |
+</div>
 
-## Installation (Developer Mode)
+---
 
-1. Clone or download this repository
-2. Open Chrome and navigate to `chrome://extensions`
-3. Enable **Developer mode** (toggle in top-right corner)
-4. Click **Load unpacked**
-5. Select the `basepaint-plugin` folder
-6. Navigate to [basepaint.xyz/paint](https://basepaint.xyz/paint) — the plugin tools appear next to basepaint's native toolbar
+## 🏆 Winner — "For Artists" category at BasePaint Hackathon 2026
 
-Not on the Chrome Web Store yet — load it unpacked while we finish the submission.
+BasePaint Plugin took first place in the **"For Artists"** category at the [BasePaint Hackathon 2026](https://basepaint.xyz/hack) — out of every project built for artists making pixel art on the daily canvas.
 
-## How It Works
+📣 **[Announcement on X (basepaint_xyz)](https://x.com/basepaint_xyz/status/2089728698866184299)**
 
-The extension injects a content script that:
+> Four tools that ship with v0.1.0: Bucket Fill, Image Upload, Color Picker, Stroke Download. Built for the workflow artists actually want — fast palette matching, no-overprint upload, exact-color flood fill, and a stroke downloader that doesn't fight the per-stroke pixel cap.
 
-1. **Waits** for BasePaint's Next.js SPA to hydrate
+</div>
+
+---
+
+## ✨ Features
+
+<div align="center">
+
+| 🪣 | 📤 | 🎨 | ⬇ |
+|:---:|:---:|:---:|:---:|
+| **Bucket Fill** | **Image Upload** | **Color Picker** | **Stroke Download** |
+| Exact-color flood fill (8-way) | Drop an image, get palette-matched strokes | Click any pixel — picks the nearest palette color | Export your strokes as PNG or paste-ready text |
+| Hotkey `B` | Optional _no-overprint_ mode | Hotkey `I` | Split into N-pixel chunks |
+
+</div>
+
+All four tools respect basepaint's native toolbar, use its font tokens (Viga / MEK Sans / Roboto Mono) and brand colors (`#0042e0`, `#fde047`), and write back to its React state via the same clipboard-paste path the toolbox uses.
+
+---
+
+## 🚀 Quick start
+
+### 1. Download
+
+Grab the latest release: **[`basepaint-plugin-v0.1.0.zip`](https://github.com/mrkjyqnt/basepaint-plugin/releases/latest)**
+
+### 2. Install (Developer Mode)
+
+```bash
+# 1. Unzip the downloaded file
+# 2. Open chrome://extensions
+# 3. Toggle "Developer mode" on (top-right)
+# 4. Click "Load unpacked" → pick the unzipped folder
+# 5. Visit https://basepaint.xyz/paint
+# 6. Five new tool buttons appear next to basepaint's native toolbar
+```
+
+### 3. Verify
+
+You should see four new tool buttons injected into basepaint's toolbar above the Delete/Save row. Click **B** for Bucket Fill, **I** for Color Picker, or use the buttons directly.
+
+---
+
+## 🧠 How it works
+
+The extension is a single content script that lives inside `basepaint.xyz`:
+
+1. **Waits** for BasePaint's Next.js SPA to hydrate (`MutationObserver`)
 2. **Discovers** the toolbar using structural DOM patterns (not fragile class names)
 3. **Injects** tool buttons directly into the existing toolbar
-4. **Reads** your strokes via basepaint's native Copy button — never from the on-chain canvas
-5. **Writes** strokes back via basepaint's native Paste Strokes button — same path the upload flow uses
+4. **Reads** the canvas via a `willReadFrequently: true` proxy — no Chrome perf warnings
+5. **Writes** strokes back via basepaint's native Copy → Paste path (or React fiber `onPaste`)
 
 The extension does **not** handle wallet/blockchain transactions — it modifies the canvas locally, and you use BasePaint's native Save button to submit your strokes on-chain.
 
-## Architecture
+---
+
+## 🛠 Stack
+
+| Layer | Tech |
+|---|---|
+| Language | Vanilla JS (ES2017+) — no build step, no bundler, no framework |
+| Manifest | Chrome MV3 |
+| Permissions | None (content script only) |
+| Fonts | basepaint's own — Viga / MEK Sans / MEK Mono / Roboto Mono |
+| Colors | basepaint's own — `#0042e0` / `#fde047` / `#1E2735` |
+| Canvas API | `getContext('2d', { willReadFrequently: true })` proxy reads, `putImageData` for atomic writes |
+
+---
+
+## 📁 Architecture
 
 ```
 basepaint-plugin/
@@ -45,42 +104,59 @@ basepaint-plugin/
 │   └── content/
 │       ├── config.js            # Runtime config (HACK_URL, SHARE_URL, VERSION)
 │       ├── styles.css           # Toolbar styles + basepaint font-face declarations
-│       ├── canvas-utils.js      # Read canvas pixels, build palette lookup, export PNG
+│       ├── canvas-utils.js      # Read canvas pixels, palette lookup, export PNG
 │       ├── main.js              # Content script entry, modals, toolbar injection
 │       └── tools/
 │           ├── bucket.js        # Flood fill (BFS, exact pixel match)
 │           ├── upload.js        # Image → palette match → strokes
 │           ├── picker.js        # Click canvas → nearest palette color
-│           ├── mirror.js        # Symmetric drawing
-│           └── (download uses native Copy + our text export)
+│           ├── download.js      # Stroke download (PNG + paste-ready text)
+│           └── (mirror.js removed in v0.1.0)
 ├── icons/                       # Extension icons (16/32/48/128)
 ├── docs/                        # GitHub Pages landing page (index.html + assets/)
 ├── dist/                        # Built copy of src/ for the unpacked load
+├── .scratch/                    # Wayfinder maps (local-only, planning artifacts)
 └── README.md
 ```
 
-### Stack
+---
 
-- **Vanilla JS** (ES2017+) — no build step, no bundler, no framework
-- **Basepaint brand tokens** — `--bp-bg: #1E2735`, `--bp-blue: #0042e0`, etc.
-- **Basepaint fonts** — Viga / Roboto Mono / MEK Sans / MEK Mono, loaded from the host page's CDN
-- **Permissions**: none (content script only)
+## 🗺 Roadmap
 
-## Landing Page
+- [x] v0.1.0 — Bucket Fill, Image Upload, Color Picker, Stroke Download
+- [ ] v0.2.0 — Layer manager (named layers: sketch / lineart / fill / reference)
+- [ ] v0.3.0 — Selection tools (rectangle, lasso, magic wand)
+- [ ] v0.4.0 — Line / shape tools (line, rectangle, ellipse, polygon) with shift-to-constrain
+- [ ] v0.5.0 — Color palette manager (save/load named palettes, project-local)
+- [ ] v1.0 — Public release on Chrome Web Store
+
+Track progress in the [GitHub releases](https://github.com/mrkjyqnt/basepaint-plugin/releases).
+
+---
+
+## 🌐 Landing page
 
 Marketing + install instructions live in [`docs/`](./docs/), served via GitHub Pages:
+
+🌐 **<https://mrkjyqnt.github.io/basepaint-plugin/>**
 
 ```
 Settings → Pages → Source: Deploy from a branch → Branch: main → Folder: /docs
 ```
 
-## References
+---
+
+## 🙏 References
 
 This plugin builds on two pieces of work that came before it:
 
 - **[CopyStroke by Afuro](https://copystroke.vercel.app/)** — the clipboard-paste pattern that makes bucket & upload possible
 - **[Baseprite by Creamy](https://www.tinypixelpepe.com/baseprite/)** — plugin UX & canvas-tool reference
 
-## License
+And of course [BasePaint](https://basepaint.xyz) itself — the daily pixel-art canvas this plugin extends.
 
-CC0 — paint whatever you want. Public domain.
+---
+
+## 📄 License
+
+[CC0](https://creativecommons.org/publicdomain/zero/1.0/) — paint whatever you want. Public domain.

@@ -101,6 +101,78 @@ p { color: var(--bp-text-2); }
 
 /* ── Hero ──────────────────────────────────────────── */
 .hero { padding-top: 96px; padding-bottom: 96px; }
+
+.award-banner {
+  background: linear-gradient(135deg, #0042e0 0%, #073eb1 100%);
+  border-bottom: 2px solid #fde047;
+  padding: 18px 0;
+  position: relative;
+  overflow: hidden;
+}
+.award-banner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 50%, rgba(253, 224, 71, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 80% 50%, rgba(253, 224, 71, 0.05) 0%, transparent 50%);
+  pointer-events: none;
+}
+.award-banner .wrap {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  position: relative;
+}
+.award-trophy {
+  font-size: 36px;
+  line-height: 1;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4));
+}
+.award-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+.award-eyebrow {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  color: #fde047;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.award-title {
+  font-family: 'MEK Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: -0.01em;
+}
+.award-link {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 12px;
+  font-weight: 600;
+  color: #fde047;
+  text-decoration: none;
+  padding: 8px 14px;
+  border: 1px solid rgba(253, 224, 71, 0.4);
+  border-radius: 4px;
+  white-space: nowrap;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+.award-link:hover {
+  background: rgba(253, 224, 71, 0.15);
+  border-color: #fde047;
+  text-decoration: none;
+}
+@media (max-width: 600px) {
+  .award-trophy { font-size: 28px; }
+  .award-title { font-size: 14px; }
+  .award-link { padding: 6px 10px; font-size: 11px; }
+}
 .hero-grid {
   display: grid; grid-template-columns: 1fr auto; gap: 40px;
   align-items: center;
@@ -337,6 +409,17 @@ p { color: var(--bp-text-2); }
     </nav>
   </div>
 </header>
+
+<div class="award-banner">
+  <div class="wrap">
+    <span class="award-trophy">🏆</span>
+    <div class="award-text">
+      <span class="award-eyebrow">BasePaint Hackathon 2026 — Winner</span>
+      <span class="award-title">"For Artists" category — 1st place</span>
+    </div>
+    <a href="https://x.com/basepaint_xyz/status/2089728698866184299" target="_blank" rel="noopener" class="award-link">See announcement ↗</a>
+  </div>
+</div>
 
 <section class="hero">
   <div class="wrap">

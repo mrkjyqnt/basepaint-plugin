@@ -121,19 +121,6 @@ basepaint-plugin/
 
 ---
 
-## 🗺 Roadmap
-
-- [x] v0.1.0 — Bucket Fill, Image Upload, Color Picker, Stroke Download
-- [ ] v0.2.0 — Layer manager (named layers: sketch / lineart / fill / reference)
-- [ ] v0.3.0 — Selection tools (rectangle, lasso, magic wand)
-- [ ] v0.4.0 — Line / shape tools (line, rectangle, ellipse, polygon) with shift-to-constrain
-- [ ] v0.5.0 — Color palette manager (save/load named palettes, project-local)
-- [ ] v1.0 — Public release on Chrome Web Store
-
-Track progress in the [GitHub releases](https://github.com/mrkjyqnt/basepaint-plugin/releases).
-
----
-
 ## 🌐 Landing page
 
 Marketing + install instructions live in [`docs/`](./docs/), served via GitHub Pages:
